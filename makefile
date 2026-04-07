@@ -7,5 +7,7 @@ obj/main.o: src/main.cpp include/functions.h
 obj/functions.o : src/functions.cpp include/functions.h
 	g++ -c src/functions.cpp -o obj/functions.o
 
+clean:
+	rm -f main obj/*o
 exec:
 	@./main
