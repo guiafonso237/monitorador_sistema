@@ -1,9 +1,10 @@
 #include "../include/functions.h"
 #include <iostream>
-int main(){
-    std::string memTotal;
-    std::string memDisponivel = uso_memoria(memTotal);
 
-    std::cout << memTotal << std::endl << memDisponivel << std::endl;
+int main(){
+    float memTotal;
+    float memDisponivel = uso_memoria(memTotal);
+
+    std::cout << "Memoria Total: " << memTotal << std::endl << "Memoria Disponivel: " <<memDisponivel << std::endl;
 
 }

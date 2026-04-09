@@ -1,23 +1,42 @@
 #include "../include/functions.h"
 #include <fstream>
+#include <cmath>
 
-std::string uso_memoria(std::string &memTotal){
+float uso_memoria(float &memTotal){
     std::string memDisponivel, memoriaTotal;
-    memoriaTotal = obterString("/proc/meminfo", 1);
-
-    memoriaTotal.erase(0, 16);
     
-    memTotal = memoriaTotal;
+    memoriaTotal = obterString("/proc/meminfo", 1);
+    memoriaTotal.erase(0,9);
 
-    memDisponivel = obterString("/proc/meminfo", 2);
-    memDisponivel.erase(0, 17);
+    while(memoriaTotal[0] == ' '){
+        memoriaTotal.erase(0,1);
+    }
 
-    return memDisponivel;
+    size_t pos = memoriaTotal.find(' ');
+    memoriaTotal = memoriaTotal.substr(0, pos);
+    
+    memTotal = stof(memoriaTotal)/1000000;
+    memTotal = std::round(memTotal);
+
+    memDisponivel = obterString("/proc/meminfo", 3);
+    memDisponivel.erase(0, 13);
+    
+    while(memDisponivel[0] == ' '){
+        memDisponivel.erase(0,1);
+    }
+
+    pos = memDisponivel.find(' ');
+    memDisponivel = memDisponivel.substr(0, pos);
+
+    float memoriaDisponivel =  std::stof(memDisponivel)/1000000;
+
+    return std::round(memoriaDisponivel);
 }
 
 std::string obterString(std::string caminho, int linha){
     std::string lixo, resultado;
     std::ifstream fin;
+
     fin.open(caminho);
     if(fin.is_open()){
         for(int i = 1; i < linha; i++){
