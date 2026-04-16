@@ -59,5 +59,25 @@ std::string obterString(std::string caminho, int linha){
 }
 
 int obterLinha(std::string caminho, std::string chave){
+    std::string lixo;
+    std::ifstream fin;
+    int linha = 0;
 
+    fin.open(caminho);
+
+    try{
+        while(std::getline(fin, lixo)){
+            if(lixo.find(chave) != std::string::npos){
+                fin.close();
+
+                return linha;
+            }
+
+            linha++;
+        }
+    }
+    catch(int erro){
+        return -1;
+    }
+    return -2;
 }
