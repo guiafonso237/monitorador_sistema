@@ -1,5 +1,6 @@
 compile: obj/main.o obj/functions.o
 	g++ -o bin/main obj/main.o obj/functions.o
+	clear
 
 obj/main.o: src/main.cpp include/functions.h
 	g++ -c src/main.cpp -o obj/main.o

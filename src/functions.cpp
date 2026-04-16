@@ -16,7 +16,7 @@ float uso_memoria(float &memTotal){
     memoriaTotal = memoriaTotal.substr(0, pos);
     
     memTotal = stof(memoriaTotal)/1000000;
-    memTotal = std::round(memTotal);
+    memTotal = std::round(memTotal* 100) / 100;
 
     memDisponivel = obterString("/proc/meminfo", 3);
     memDisponivel.erase(0, 13);
@@ -30,7 +30,7 @@ float uso_memoria(float &memTotal){
 
     float memoriaDisponivel =  std::stof(memDisponivel)/1000000;
 
-    return std::round(memoriaDisponivel);
+    return std::round(memoriaDisponivel * 100) / 100;
 }
 
 std::string obterString(std::string caminho, int linha){
@@ -38,11 +38,26 @@ std::string obterString(std::string caminho, int linha){
     std::ifstream fin;
 
     fin.open(caminho);
-    if(fin.is_open()){
+
+    try{
+        if(!fin.is_open()){
+            throw -1;
+        }
+
         for(int i = 1; i < linha; i++){
             std::getline(fin, lixo);
         }
+
         std::getline(fin, resultado);
+        fin.close();
+
+        return resultado;
     }
-    return resultado;
+    catch(int erro){
+        return "";
+    }
+}
+
+int obterLinha(std::string caminho, std::string chave){
+
 }
