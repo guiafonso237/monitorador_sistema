@@ -6,8 +6,8 @@
 
 class File{
     private:
-        std::fstream fin;
-        std::string caminho, chave;
+        std::ifstream fin;
+        std::string caminho = "", chave = "";
         int linha;
     
     public:

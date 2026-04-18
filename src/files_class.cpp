@@ -1,6 +1,5 @@
 #include "../include/files_class.h"
 
-
     void File::setCaminho(std::string caminho){
         this->caminho = caminho;
     }
@@ -26,7 +25,8 @@
     }
 
     void File::abrirArquivo(){
-        fin.open(this->caminho);
+        this->fin.open(this->caminho);
+        
     }
 
     void const File::fecharArquivo(){
@@ -46,6 +46,7 @@
             }
 
             std::getline(fin, resultado);
+
             return resultado;
         }
         catch(int erro){

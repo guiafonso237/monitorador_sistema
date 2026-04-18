@@ -1,4 +1,6 @@
 #include "../include/functions.h"
+#include "../include/files_class.h"
+
 #include <fstream>
 #include <cmath>
 
@@ -34,28 +36,18 @@ float uso_memoria(float &memTotal){
 }
 
 std::string obterString(std::string caminho, int linha){
-    std::string lixo, resultado;
-    std::ifstream fin;
+    File arquivo;
 
-    fin.open(caminho);
+    arquivo.setCaminho(caminho);
+    arquivo.setLinha(linha);
 
-    try{
-        if(!fin.is_open()){
-            throw -1;
-        }
+    arquivo.abrirArquivo();
 
-        for(int i = 1; i < linha; i++){
-            std::getline(fin, lixo);
-        }
+    std::string resultado = arquivo.obterString();
 
-        std::getline(fin, resultado);
-        fin.close();
+    arquivo.fecharArquivo();
 
-        return resultado;
-    }
-    catch(int erro){
-        return "";
-    }
+    return resultado;
 }
 
 int obterLinha(std::string caminho, std::string chave){

@@ -7,5 +7,5 @@ int main(){
 
     std::cout << "Memoria Total: " << memTotal << std::endl << "Memoria Disponivel: " <<memDisponivel << std::endl;
 
-    
+    return 0;
 }
