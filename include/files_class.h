@@ -3,6 +3,8 @@
 
 #include <string>
 #include <fstream>
+#include <sstream>
+
 
 class File{
     private:
@@ -15,11 +17,14 @@ class File{
         void setLinha(int linha);
         void setChave(std::string chave);
 
-        std::string getCaminho();
+        
         int getLinha();
+        
+        std::string getCaminho();
         std::string getChave();
 
         std::string obterString();
+
         //int obterLinha();
         void abrirArquivo();
         void const fecharArquivo();
